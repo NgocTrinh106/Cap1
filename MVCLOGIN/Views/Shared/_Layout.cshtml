@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/New.css" rel="stylesheet" />
+</head>
+<body>
+    @{ var user = Session["User"] as MVCLOGIN.Models.User;}
+    <div class="container">
+        <div class="header">
+            <img class="logo" src="./Images/anh4.png">
+            <h2>BCPMSDS</h2>
+        </div>
+        <div class="nav">
+            <ul>
+                <li> @Html.ActionLink("Home", "Home", "Home", new { area = "" })</li>
+                <li> @Html.ActionLink("News", "New", "Home", new { area = "" })</li>
+                <li> @Html.ActionLink("Product", "Product", "Home", new { area = "" })</li>
+                <li> @Html.ActionLink("Order", "Order", "Home", new { area = "" })</li>
+                @{ if (user == null)
+                    {
+
+                        <li>@Html.ActionLink("Sign In", "SignIn", "Home", new { area = "" })</li>
+                        <li>@Html.ActionLink("Sign Up", "SignUp", "Home", new { area = "" })</li>
+                    }
+                }
+                @{ if (user != null)
+                    {
+                        <li>@Html.ActionLink("Log Out", "LogOut", "Home", new { area = "" })</li>
+                    }
+
+                }
+            </ul>
+        </div>
+        </div>
+        
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>
+
+        
+        @RenderSection("scripts", required: false)
+</body>
+</html>
